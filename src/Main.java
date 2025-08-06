@@ -2,10 +2,11 @@ import java.sql.*;      /* Imported the package named 'java.sql' contains all dr
                         that we'll use to work with JDBC need */
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) {
         String url = "jdbc:mysql://127.0.0.1:3306/mydatabases";
         String username = "root";
         String password = "#Apek1712";
+        String query = "INSERT INTO employees(id, name, job_title, salary) VALUES (3, 'Om', 'Project Engineer', 30000.0);" ;
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -16,6 +17,38 @@ public class Main {
         try{
             Connection con = DriverManager.getConnection(url, username, password);
             System.out.println("Connection Established Successfully!!");
+            System.out.println();
+            Statement stmt = con.createStatement();
+            /* ResultSet rs = stmt.executeQuery(query);
+            while (rs.next())    // rs.next() means jb tk is rs instance me data rahega tb tk ye value true rahegi and loop chalta rahega.
+            {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String job_title = rs.getString("job_title");
+                double salary = rs.getDouble("salary");
+
+                System.out.println("===============================");
+                System.out.println("ID : "+ id);
+                System.out.println("Name : "+ name);
+                System.out.println("Job Title : "+ job_title);
+                System.out.println("Salary : "+ salary);
+                System.out.println();
+
+            }
+            rs.close(); */
+            // It was for select * from employees query ^_^
+
+
+            int rowsAffected = stmt.executeUpdate(query);
+            if (rowsAffected > 0){
+                System.out.println("Insert Successful. "+ rowsAffected + "row(s) affected.");
+            }else {
+                System.out.println("Insertion Failed!!");
+            }
+
+            stmt.close();
+            con.close();
+            System.out.println("---Connection closed successfully!!---");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
