@@ -6,7 +6,7 @@ public class Main {
         String url = "jdbc:mysql://127.0.0.1:3306/mydatabases";
         String username = "root";
         String password = "#Apek1712";
-        String query = "INSERT INTO employees(id, name, job_title, salary) VALUES (3, 'Om', 'Project Engineer', 30000.0);" ;
+        String query = "DELETE from employees where id = 5" ;
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -41,9 +41,9 @@ public class Main {
 
             int rowsAffected = stmt.executeUpdate(query);
             if (rowsAffected > 0){
-                System.out.println("Insert Successful. "+ rowsAffected + "row(s) affected.");
+                System.out.println("Deletion Successful. "+ rowsAffected + " row(s) affected.");
             }else {
-                System.out.println("Insertion Failed!!");
+                System.out.println("Deletion Failed!!");
             }
 
             stmt.close();
