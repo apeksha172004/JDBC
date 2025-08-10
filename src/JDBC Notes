@@ -5,7 +5,7 @@ public class Main(){
         String url = ""'
         String username = "root";
         String password = "#Apek1712";
-        String query = "";
+        String query = "SELECT * FROM employees where name = ? AND job_title = ?";  // For prepared statement
         try{
             class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Drivers loaded successfully!!");
@@ -19,3 +19,23 @@ public class Main(){
             Statement stmt = con.createStatement();  // For simple statement generation
 
             PreparedStatement ps = con.PreparedStatement(query);
+            ps.setString(1, "Hemant");
+            ps.setString(2, "Devops Engineer");
+            ResultSet resultSet = ps.executeQuery(); // Used when need to retrieve data
+            while(resultSet.next()){
+                int id = resultSet.getInt("id")";
+                String name = resultSet.getString("name")";
+                String job_title = resultSet.getString("job_title")";
+                double salary = resultSet.getDouble("salary")";
+                System.out.println("ID : "+ id);
+                System.out.println("Name : "+ name);
+                System.out.println("Job Title : "+ job_title);
+                System.out.println("Salary : "+ salary);
+            }
+            resultSet.close();
+            PreparedStatement.close();
+            con.close();
+            System.out.println("Connection closed!!");
+        } catch(SQlException e){
+            System.out.println(e,getMessage());
+        }
