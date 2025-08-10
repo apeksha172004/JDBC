@@ -39,3 +39,6 @@ public class Main(){
         } catch(SQlException e){
             System.out.println(e,getMessage());
         }
+
+To insert the rows..We create variable named rowsAffected
+e.g int rowsAffected = ps.executeUpdate();
